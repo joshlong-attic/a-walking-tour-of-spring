@@ -22,7 +22,6 @@ public class CustomerService {
     @Autowired
     private SessionFactory sessionFactory;
 
-
     @Transactional
     public Customer createCustomer(String firstName, String lastName, Date signupDate) {
         Customer customer = new Customer();
