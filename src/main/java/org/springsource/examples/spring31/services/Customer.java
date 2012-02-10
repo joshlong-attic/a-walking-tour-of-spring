@@ -1,11 +1,12 @@
 package org.springsource.examples.spring31.services;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 @Entity
 public class Customer {
