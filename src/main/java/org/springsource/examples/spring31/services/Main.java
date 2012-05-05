@@ -10,8 +10,9 @@ public class Main {
     	
         AnnotationConfigApplicationContext annotationConfigApplicationContext =
                 new AnnotationConfigApplicationContext(ServicesConfiguration.class.getPackage().getName());
+        
         CustomerService customerService = annotationConfigApplicationContext.getBean(CustomerService.class);
-        Customer customer = customerService.createCustomer("Josh", "Long", new Date());        
+        Customer customer = customerService.createCustomer("Ray", "Tayek", new Date());        
         customer  = customerService.getCustomerById( customer.getId()) ;        
         customer = customerService.getCustomerById( customer.getId());
     }

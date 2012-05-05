@@ -18,6 +18,7 @@ import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
@@ -35,7 +36,7 @@ public class ServicesConfiguration {
     @Autowired
     private Environment environment;
 
-    @Bean
+    @Bean 
     public CacheManager cacheManager() {
         SimpleCacheManager scm = new SimpleCacheManager();
         Cache cache = new ConcurrentMapCache("customers");
@@ -48,7 +49,7 @@ public class ServicesConfiguration {
         return new HibernateTransactionManager(this.sessionFactory());
     }
 
-    @Bean
+    @Bean  
     public DataSource dataSource() throws Exception {
         SimpleDriverDataSource simpleDriverDataSource = new SimpleDriverDataSource();
 
@@ -68,7 +69,7 @@ public class ServicesConfiguration {
     @Bean
     public SessionFactory sessionFactory() throws Exception {
         Properties props = new Properties();
-        props.setProperty(org.hibernate.cfg.Environment.HBM2DDL_AUTO, "create");
+        props.setProperty(org.hibernate.cfg.Environment.HBM2DDL_AUTO, "validate");
         props.setProperty(org.hibernate.cfg.Environment.DIALECT, H2Dialect.class.getName());
         props.setProperty(org.hibernate.cfg.Environment.SHOW_SQL,"true");
 

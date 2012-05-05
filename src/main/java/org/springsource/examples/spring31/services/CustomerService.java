@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CustomerService {
-
+ 
     private Log log = LogFactory.getLog(getClass());
 
     static private final String CUSTOMERS_REGION = "customers";
@@ -34,7 +34,6 @@ public class CustomerService {
     }
 
     @Transactional(readOnly = true)
-    @SuppressWarnings("unchecked")
     public List<Customer> getAllCustomers() {
         return sessionFactory.getCurrentSession().createCriteria(Customer.class).list();
     }

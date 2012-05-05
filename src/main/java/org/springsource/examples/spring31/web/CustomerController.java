@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.hibernate.service.spi.InjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springsource.examples.spring31.services.Customer;
 import org.springsource.examples.spring31.services.CustomerService;
 
@@ -22,14 +25,13 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @RequestMapping(value = "/customer/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
+    @RequestMapping(value = "/customer/{id}", method = RequestMethod.GET,  produces = MediaType.APPLICATION_JSON_VALUE)
     public Customer customerById(@PathVariable("id") Integer id) {
         return this.customerService.getCustomerById(id);
     }
 
-    @RequestMapping(value = "/customers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
+    @ResponseBody @RequestMapping(value = "/customers", method = RequestMethod.GET,  produces = "application/xml" )
     public List<Customer> customers() {
         return this.customerService.getAllCustomers();
     }
@@ -46,7 +48,7 @@ public class CustomerController {
         customerService.updateCustomer(id, customer.getFirstName(), customer.getLastName(), customer.getSignupDate());
         return id;
     }
-
+    
     @RequestMapping(value = "/customer/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Integer deleteCustomer(@PathVariable("id") Integer id) {
